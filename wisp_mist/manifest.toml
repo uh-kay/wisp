@@ -28,7 +28,7 @@ packages = [
   { name = "mist", version = "6.0.2", build_tools = ["gleam"], requirements = ["exception", "gleam_erlang", "gleam_http", "gleam_otp", "gleam_stdlib", "glisten", "gramps", "hpack_erl", "logging"], otp_app = "mist", source = "hex", outer_checksum = "6B03DEEA38A02F276333CB27B53B16D3D45BD741B89599085A601BAF635F2006" },
   { name = "platform", version = "1.0.0", build_tools = ["gleam"], requirements = [], otp_app = "platform", source = "hex", outer_checksum = "8339420A95AD89AAC0F82F4C3DB8DD401041742D6C3F46132A8739F6AEB75391" },
   { name = "simplifile", version = "2.6.0", build_tools = ["gleam"], requirements = ["filepath", "gleam_stdlib"], otp_app = "simplifile", source = "hex", outer_checksum = "A33C345F0A4FFB91DCCD4220114534A58C387964A5F17B3E472CEBD1ADA9FFB4" },
-  { name = "wisp", version = "2.2.1", build_tools = ["gleam"], requirements = ["directories", "exception", "filepath", "gleam_crypto", "gleam_erlang", "gleam_http", "gleam_json", "gleam_otp", "gleam_stdlib", "houdini", "logging", "marceau", "simplifile"], source = "git", repo = "https://github.com/uh-kay/wisp", commit = "db5a071497b4c60e07f5ed97472ac2d8ab3978ec" },
+  { name = "wisp", version = "2.2.1", build_tools = ["gleam"], requirements = ["directories", "exception", "filepath", "gleam_crypto", "gleam_erlang", "gleam_http", "gleam_json", "gleam_otp", "gleam_stdlib", "houdini", "logging", "marceau", "simplifile"], source = "local", path = ".." },
 ]
 
 [requirements]
@@ -38,4 +38,4 @@ gleam_httpc = { version = ">= 5.0.0 and < 6.0.0" }
 gleam_stdlib = { version = ">= 0.70.0 and < 2.0.0" }
 gleeunit = { version = ">= 1.0.0 and < 2.0.0" }
 mist = { version = ">= 6.0.0 and < 7.0.0" }
-wisp = { git = "https://github.com/uh-kay/wisp", ref = "db5a071" }
+wisp = { path = ".." }
