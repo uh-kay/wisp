@@ -87,10 +87,10 @@ pub fn session(
 }
 
 /// Add a text body to the request.
-/// 
+///
 /// The `content-type` header is set to `text/plain`. You may want to override
 /// this with `request.set_header`.
-/// 
+///
 pub fn string_body(request: Request, text: String) -> Request {
   let body =
     text
@@ -102,10 +102,10 @@ pub fn string_body(request: Request, text: String) -> Request {
 }
 
 /// Add a binary body to the request.
-/// 
+///
 /// The `content-type` header is set to `application/octet-stream`. You may
 /// want to override/ this with `request.set_header`.
-/// 
+///
 pub fn bit_array_body(request: Request, data: BitArray) -> Request {
   let body = wisp.create_canned_connection(data, default_secret_key_base)
   request
@@ -114,9 +114,9 @@ pub fn bit_array_body(request: Request, data: BitArray) -> Request {
 }
 
 /// Add HTML body to the request.
-/// 
+///
 /// The `content-type` header is set to `text/html; charset=utf-8`.
-/// 
+///
 pub fn html_body(request: Request, html: String) -> Request {
   let body =
     html
@@ -128,9 +128,9 @@ pub fn html_body(request: Request, html: String) -> Request {
 }
 
 /// Add a form data body to the request.
-/// 
+///
 /// The `content-type` header is set to `application/x-www-form-urlencoded`.
-/// 
+///
 pub fn form_body(request: Request, data: List(#(String, String))) -> Request {
   let body =
     uri.query_to_string(data)
@@ -142,9 +142,9 @@ pub fn form_body(request: Request, data: List(#(String, String))) -> Request {
 }
 
 /// Add a JSON body to the request.
-/// 
+///
 /// The `content-type` header is set to `application/json`.
-/// 
+///
 pub fn json_body(request: Request, data: Json) -> Request {
   let body =
     json.to_string(data)
@@ -163,23 +163,23 @@ pub type FileUpload {
 
 /// Add a multipart/form-data body to the request for testing file uploads
 /// and form submissions.
-/// 
+///
 /// The `content-type` header is set to `multipart/form-data` with an
 /// appropriate boundary.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```gleam
 /// let file = UploadedFile(
-///   file_name: "test.txt", 
+///   file_name: "test.txt",
 ///   content_type: "text/plain",
 ///   content: <<"Hello, world!":utf8>>
 /// )
-/// 
+///
 /// simulate.request(http.Post, "/upload")
 /// |> simulate.multipart_body([#("user", "joe")], [#("file", file)])
 /// ```
-/// 
+///
 pub fn multipart_body(
   request: Request,
   values values: List(#(String, String)),
@@ -279,6 +279,8 @@ pub fn read_body(response: Response) -> String {
         as "the body file range was not valid UTF-8"
       string
     }
+    wisp.WebSocket(_) ->
+      panic as "Cannot read body of WebSocket response - use a WebSocket client instead"
   }
 }
 
@@ -306,17 +308,19 @@ pub fn read_body_bits(response: Response) -> BitArray {
         as "the body was a file, but the limit and offset were invalid"
       sliced
     }
+    wisp.WebSocket(_) ->
+      panic as "Cannot read body of WebSocket response - use a WebSocket client instead"
   }
 }
 
 /// Set a header on a request.
-/// 
+///
 pub fn header(request: Request, name: String, value: String) -> Request {
   request.set_header(request, name, value)
 }
 
 /// Set a cookie on the request.
-/// 
+///
 pub fn cookie(
   request: Request,
   name: String,
