@@ -12,7 +12,7 @@ gleam_stdlib = ">= 0.70.0 and < 2.0.0"
 mist = ">= 6.0.0 and < 7.0.0"
 wisp = {
   git = "https://github.com/uh-kay/wisp",
-  ref = "c02d9b2"
+  ref = "db5a071"
 }
 gleam_http = ">= 4.0.0 and < 5.0.0"
 exception = ">= 2.0.0 and < 3.0.0"
